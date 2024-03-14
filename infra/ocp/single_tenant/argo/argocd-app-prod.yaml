@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: stage-spring-petclinic
+spec:
+  destination:
+    namespace: demo-prod
+    server: https://kubernetes.default.svc
+  project: spring-petclinic
+  source:
+    path: environments/prod
+    repoURL: https://github.com/lightspeed001/firebase-spring-boot-crud
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

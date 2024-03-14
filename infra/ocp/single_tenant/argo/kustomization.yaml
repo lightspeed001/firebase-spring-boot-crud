@@ -1,0 +1,9 @@
+resources:
+- argocd.yaml
+- argocd-java-movie-crud-project.yaml
+- argocd-app-dev.yaml
+- argocd-app-stage.yaml
+- argocd-app-prod.yaml
+
+patchesStrategicMerge:
+- tmp-argocd-app-patch.yaml

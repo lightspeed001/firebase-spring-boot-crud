@@ -1,0 +1,76 @@
+name: monitoring-stack
+runtime: kubernetes
+description: Deployment of the Prometheus and Grafana monitoring stack on Kubernetes.
+
+resources:
+  # Define the Prometheus Deployment
+  prometheus-deployment:
+    type: apps/v1:Deployment
+    properties:
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: prometheus
+        template:
+          metadata:
+            labels:
+              app: prometheus
+          spec:
+            containers:
+              - name: prometheus
+                image: prom/prometheus:v2.26.0
+                ports:
+                  - containerPort: 9090
+
+  # Create a Service for Prometheus
+  prometheus-service:
+    type: core/v1:Service
+    properties:
+      spec:
+        selector:
+          app: prometheus
+        ports:
+          - port: 9090
+            targetPort: 9090
+
+  # Define the Grafana Deployment
+  grafana-deployment:
+    type: apps/v1:Deployment
+    properties:
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: grafana
+        template:
+          metadata:
+            labels:
+              app: grafana
+          spec:
+            containers:
+              - name: grafana
+                image: grafana/grafana:7.5.4
+                ports:
+                  - containerPort: 3000
+                env:
+                  - name: GF_SECURITY_ADMIN_PASSWORD
+                    value: admin
+                    # Note: Use more secure methods for sensitive data such as secrets
+
+  # Create a Service to expose Grafana
+  grafana-service:
+    type: core/v1:Service
+    properties:
+      spec:
+        selector:
+          app: grafana
+        type: LoadBalancer
+        ports:
+          - port: 3000
+            targetPort: 3000
+
+outputs:
+  grafanaExternalUrl:
+    ${grafana-service.status.loadBalancer.ingress[0].hostname}: ${grafana-service.status.loadBalancer.ingress[0].ip}
+
