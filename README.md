@@ -1,7 +1,6 @@
 ## Firestore database with Java Spring-boot
 ### A Small Movie-management-system
 #### The application exposes REST API endpoints to perform CRUD operations on the below mentioned documents
-#### [Sample Running Application](https://sunspot-firebase-spring.herokuapp.com/sunspot/swagger-ui.html)
 ---
 ## Documents and corresponding fields in the application
 * **directors**
