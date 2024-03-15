@@ -15,7 +15,7 @@
   * directorId
   * movieId
 ---
-### Firebase dependecny used in the project
+### Firebase dependency used in the project
 ```
 <dependency>
 	<groupId>com.google.firebase</groupId>
