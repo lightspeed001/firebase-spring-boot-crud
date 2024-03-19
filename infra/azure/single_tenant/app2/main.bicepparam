@@ -1,4 +1,4 @@
 using 'main.bicep'
 
-param currentUserObjectId = 'b230bb12-c226-4606-a8ac-9ca05f2fbf66'
+param currentUserObjectId = '43f2b7ea-284b-4af4-9600-744da9357b7e'
 param password = 'YRV-ydm8gat_urj3hwn'

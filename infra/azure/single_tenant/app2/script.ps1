@@ -1,5 +1,5 @@
 $resourceGroup = "rg-argocd-01"
-$location = "Canada Central"
+$location = "eastus"
 
 az group create --name $resourceGroup --location $location
 
